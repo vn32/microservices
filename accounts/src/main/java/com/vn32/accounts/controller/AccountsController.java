@@ -2,6 +2,7 @@ package com.vn32.accounts.controller;
 
 
 import com.vn32.accounts.constants.AccountsConstants;
+import com.vn32.accounts.dto.AccountsContactInfoDto;
 import com.vn32.accounts.dto.CustomerDto;
 import com.vn32.accounts.dto.ErrorResponseDto;
 import com.vn32.accounts.dto.ResponseDto;
@@ -48,6 +49,9 @@ public class AccountsController {
     //to read the environment variable
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     //API Documentation ,since create is an operation under this controller
     @Operation(
@@ -217,5 +221,30 @@ public class AccountsController {
     @GetMapping("/java-version")
     public ResponseEntity<String> getJavaVersion(){
         return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME") + " " +environment.getProperty("MAVEN_HOME"));
+    }
+
+    @Operation(
+            summary = "Get Contact Info",
+            description = "Contact Info details that can be reached out in case of any issues"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
     }
 }

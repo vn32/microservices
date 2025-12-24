@@ -16,3 +16,12 @@ spring:
     show-sql: true
 build:
   version: "1.0"
+
+accounts:
+  message: "Welcome to VN Bank accounts related local APIs "
+  contactDetails:
+    name: "Vikas Nishad - Developer"
+    email: "vikas@vnbank.com"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345
