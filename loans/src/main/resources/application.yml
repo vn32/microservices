@@ -25,3 +25,8 @@ management:
     web:
       exposure:
         include: "*"
+  rabbitmq:
+    host: localhost        # or the hostname/IP of your RabbitMQ server
+    port: 5672             # default RabbitMQ port
+    username: guest        # your RabbitMQ username
+    password: guest        # your RabbitMQ password
