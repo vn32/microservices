@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        #native:
+         # search-location: "classpath:/config"
+        git:
+          uri: "https://github.com/vn32/vnbank-config"
+          default-label: main # branch name where the config file attached
+          timeout: 5 # if in 5 seconds no connection happen with github, it will throw an error
+          clone-on-start: true #At the start of config server it will clone the git config files in cache
+          force-pull: true # override all local changes which matches the config server
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  rabbitmq:
+    host: localhost        # or the hostname/IP of your RabbitMQ server
+    port: 5672             # default RabbitMQ port
+    username: guest        # your RabbitMQ username
+    password: guest        # your RabbitMQ password
+server:
+  port: 8071
+encrypt:
+  key: "45D81EC1EF61DF9AD8D3E5BB397F9" # we can give any random key
